@@ -1,9 +1,12 @@
-// TODO: Instalar dependência do jsonwebtoken
-// import jwt from 'jsonwebtoken';
-// import authConfig = require("../config/auth.json");
+import jwt from "jsonwebtoken";
+import authConfig = require("../config/auth.json");
 
-export default function(params = {}) {
-  return undefined; /* jwt.sign({ id: user.id }, authConfig.secret, {
-    expire: 86400,
-  }); */
+interface RequestParams {
+  id: number;
+}
+
+export default function(params: RequestParams) {
+  return jwt.sign({ id: params.id }, authConfig.secret, {
+    expiresIn: 86400,
+  });
 }

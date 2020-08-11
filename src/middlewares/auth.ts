@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from "express"
-// TODO: Instalar dependência do jsonwebtoken
-// import jwt from 'jsonwebtoken';
-// import authConfig = require("../config/auth.json");
+import jwt from "jsonwebtoken";
+import authConfig from "../config/auth.json";
 
 
-export default (request: Request, response: Response, next: NextFunction) => {
+export default (request, response, next: NextFunction) => {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -29,7 +28,7 @@ export default (request: Request, response: Response, next: NextFunction) => {
     });
   }
 
-  /* jwt.verify(token, authConfig.secret, (err, decoded) => {
+  jwt.verify(token, authConfig.secret, (err, decoded) => {
     if (err) {
       return response.status(401).json({
         error: 'Token invalid'
@@ -38,7 +37,7 @@ export default (request: Request, response: Response, next: NextFunction) => {
 
     request.userId = decoded.id;
     return next();
-  }); */
+  });
 
   return next();
 }
